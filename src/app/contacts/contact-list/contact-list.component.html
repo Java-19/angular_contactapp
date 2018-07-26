@@ -1,0 +1,16 @@
+<div class="row">
+  <h2>Contact List</h2>
+  <hr>
+</div>
+<div class="row">
+  <div class="col-sm">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let contact of contactService.contacts; let i = index">
+        <a [routerLink]="['/contacts',i]">{{contact.fullName}}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="col-sm">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -14,7 +14,7 @@ export class HttpService {
     let body = {
       email:email,
       password:password
-    }
+    };
 
     return Observable.from(this.http.post<AuthResponse>(BASE_URL+'/registration',body)
       .map(response =>{
@@ -31,10 +31,28 @@ export class HttpService {
     );
   }
 
-  login(email:string, password:string){
+  login(email:string, password:string):Observable<boolean>{
+    let body = {
+      email:email,
+      password:password
+    };
 
+    return Observable.from(this.http.post<AuthResponse>(BASE_URL+'/login',body)
+      .map(response =>{
+        this.store.saveToken(response.token);
+        return true;
+      })
+      .catch(err => {
+        if(err.status == 401){
+          return Observable.throwError('Wrong email or password!');
+        }else{
+          return Observable.throwError('Server error!');
+        }
+      })
+    );
   }
 }
+
 type AuthResponse = {
   token:string;
 }

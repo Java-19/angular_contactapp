@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpService} from '../services/http.service';
+import {StoreService} from '../services/store.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class LoginPageComponent implements OnInit {
   status: string = '';
   isError: boolean = false;
 
-  constructor(private http: HttpService) {
+  constructor(private http: HttpService, private storeService:StoreService) {
   }
 
   ngOnInit() {
@@ -37,5 +38,13 @@ export class LoginPageComponent implements OnInit {
           this.isError = true;
         }
       );
+  }
+
+  login(){
+    this.storeService.saveToken("12345");
+  }
+
+  logout(){
+    this.storeService.removeToken();
   }
 }

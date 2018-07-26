@@ -1,10 +1,13 @@
 <div class="row">
-<input type="text" class="form-control"
-       [(ngModel)]="email"
-placeholder="Type email">
-<input type="text" class="form-control"
-       [(ngModel)]="password"
-       placeholder="Type password">
-<button class="btn btn-primary" (click)="registration()">Registration</button>
+  <h2>Login page</h2>
+  <input type="text" class="form-control"
+         [(ngModel)]="email"
+         placeholder="Type email">
+  <input type="text" class="form-control"
+         [(ngModel)]="password"
+         placeholder="Type password">
+  <button class="btn btn-primary m-2" (click)="registration()">Registration</button>
+  <button class="btn btn-success m-2" (click)="login()">Login</button>
+  <button class="btn btn-danger m-2" (click)="logout()">Logout</button>
 </div>
 <div class="row" [ngStyle]="{color:isError ? 'red':'green'}" *ngIf="status.length > 0">{{status}}</div>
