@@ -3,12 +3,11 @@ import {ContactListComponent} from './contact-list/contact-list.component';
 import {ContactViewComponent} from './contact-view/contact-view.component';
 import {ContactService} from '../services/contact.service';
 import {RouterModule, Routes} from '@angular/router';
-import {AuthGuard} from '../guards/auth.guard';
 import {CommonModule} from '@angular/common';
 
 const contactsRoutes: Routes = [
-  {path:'',component:ContactListComponent, canActivate:[AuthGuard], children:[
-      {path:':indx',component:ContactViewComponent}
+  {path:"",component:ContactListComponent, children:[
+      {path:":indx",component:ContactViewComponent}
     ]}
 ];
 @NgModule({

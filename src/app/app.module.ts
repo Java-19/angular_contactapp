@@ -9,14 +9,13 @@ import {HttpService} from './services/http.service';
 import {FormsModule} from '@angular/forms';
 import { TopMenuComponent } from './top-menu/top-menu.component';
 import { MainPageComponent } from './main-page/main-page.component';
-import {RouterModule, Routes} from '@angular/router';
-import {ContactsModule} from './contacts/contact.module';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './guards/auth.guard';
 
 const appRoutes:Routes = [
-  {path:'', component:MainPageComponent},
-  {path:'login',component:LoginPageComponent},
-  {path:'contacts',loadChildren:'./contacts/contact.module#ContactsModule'}
+  {path:"", component:MainPageComponent},
+  {path:"login",component:LoginPageComponent},
+  {path:"contacts",loadChildren:'./contacts/contact.module#ContactsModule',canActivate:[AuthGuard]}
 ];
 @NgModule({
   declarations: [
@@ -29,8 +28,9 @@ const appRoutes:Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes),
-    ContactsModule
+    RouterModule.forRoot(appRoutes,{
+      preloadingStrategy:PreloadAllModules
+    })
   ],
   providers: [StoreService,HttpService,AuthGuard],
   bootstrap: [AppComponent]
