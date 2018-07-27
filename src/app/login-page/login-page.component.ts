@@ -29,11 +29,14 @@ export class LoginPageComponent implements OnInit {
       .subscribe(result => {
           if (result) {
             this.status = 'registration success';
+            console.log('registration success');
           } else {
             this.status = 'registration failed!';
+            console.log('registration failed');
           }
         },
         error => {
+          console.log(error);
           this.status = error;
           this.isError = true;
         }
